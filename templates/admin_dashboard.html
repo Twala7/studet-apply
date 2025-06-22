@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Admin Dashboard</title>
+</head>
+<body>
+    <h1>Admin Dashboard</h1>
+    <h2>List of Institutions</h2>
+    <form method="POST" action="{{ url_for('admin_dashboard') }}">
+    <input type="text" name="search" placeholder="Search for an institution" value="{{ search_query }}">
+    <button type="submit">Search</button>
+</form>
+
+{% if institutions %}
+    <table border="1">
+        <tr>
+            <th>Institution Name</th>
+            <th>Courses</th>
+            <th>Actions</th>
+        </tr>
+        {% for institution in institutions %}
+        <tr>
+            <td>{{ institution.name }}</td>
+            <td>
+                {% for course in institution.courses %}
+                    {{ course.course_name }}
+                {% endfor %}
+            </td>
+            <td>
+                {% for course in institution.courses %}
+                    <a href="{{ url_for('delete_course', course_id=course.id) }}" 
+                       onclick="return confirm('Are you sure you want to delete this course?');" 
+                       style="color: red; text-decoration: none; font-weight: bold;" >
+                        Delete
+                    </a><br>
+                    <p>
+        
+        <a href="{{ url_for('edit_course', course_id=course.id) }}" 
+           style="color: blue; text-decoration: none; font-weight: bold;">Edit</a>
+    </p>
+                {% endfor %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p style="color: red;">No institutions found matching your search :ADD ONE BELOW&darr;.</p>
+{% endif %}
+
+
+
+    <ul>
+    
+
+        {% for institution in institutions %}
+        <li>
+            {{ institution.name }}
+          <a class="a-all" href="{{ url_for('manage_institutions', institution_id=institution.id) }}">Manage</a>
+          <a class="a-all" href="{{ url_for('edit_institution', inst_id=institution.id) }}">Edit</a>
+          <a class="a-all" href="{{ url_for('delete_institution', inst_id=institution.id) }}">Delete</a>
+           <a class="a-all" href="{{ url_for('add_course', inst_id=institution.id) }}">Add Course</a>
+
+        </li>
+        {% endfor %}
+    </ul>
+    <h2>Add New Institution</h2>
+    <form method="POST" action="{{ url_for('add_institution') }}">
+        <input type="text" name="name" placeholder="Institution Name" required>
+        <button type="submit">Add Institution</button>
+    </form>
+     
+
+    <a href="/">Logout</a>
+</body>
+</html>
