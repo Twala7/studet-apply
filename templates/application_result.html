@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Application Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Application Result</h2>
+    {% if qualified %}
+        <h3>Congratulations! You qualify for the following course:</h3>
+        <ul>
+            <li>
+                <strong>Institution:</strong> {{ course.institution_name }}<br>
+                <strong>Course:</strong> {{ course.course_name }}<br>
+                <strong>Requirements Met:</strong> Yes
+            </li>
+        </ul>
+    {% else %}
+        <h3>Sorry, you don’t qualify for any course currently at {{ course.institution_name }}</h3>
+    {% endif %}
+    <a class="a-all" href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+</body>
+</html>

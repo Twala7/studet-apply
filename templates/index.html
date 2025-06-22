@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lesotho Higher Education System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+   
+    <div id="top">
+    <a href="{{ url_for('register') }}" class="a-home">Register</a> 
+    <a href="{{ url_for('login') }}" class="a-home">Login</a> 
+    <a href="{{ url_for('admin_register') }}" class="a-home">Admin Register</a> 
+    <a href="{{ url_for('admin_login') }}" class="a-home">Admin Login</a>
+    </div>
+
+ <h1 id="heading">Welcome to the Lesotho Tertiary Recommendation System</h1>
+
+    <div id="pic">
+        <img src="{{ url_for('static', filename='images/world (5).jpg') }}" alt="">
+
+         <ul id="info">
+            <li ><strong>REGISTER:</strong> Only for students to register</li>
+            <li ><strong>LOGIN:</strong> Students only will login here </li>
+            <li><strong>ADMIN REGISTER:</strong> This is for only <STRONG>admin</STRONG></li>
+            <li><strong>ADMIN LOGIN:</strong> Only <STRONG>Admin</STRONG> here to log in</li>
+            <li><strong>FEEDBACK:</strong> <em>ALL</em>can visit here to give your opinion</li>
+            <li><strong>EXPLORE:</strong> <em>ALL</em>can visit here to explore</li>
+             <li><strong>STUDENTS:</strong> MAKE <em>SURE</em> YOU HIT SUBMIT AFTER APPLYING</li>
+
+        </ul>
+        <marquee behavior="scroll" direction="left" height="100" bg="lightgray" scrollamount="10" width="100%" color="blue">JOIN US HERE AND DREAM</marquee>
+       
+    </div>
+    <div id="bottom">
+        <a href="{{ url_for('feedback') }}" class="a-home-bottom">FEEDBACK</a> 
+    <a href="{{ url_for('explore_institutions') }}" class="a-home-bottom">EXPLORE</a>
+    </div>
+</body>
+</html>

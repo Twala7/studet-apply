@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h2>Explore Institutions</h2>
+
+<form method="GET" action="/explore_institutions">
+    <input type="text" name="search" placeholder="Search institutions">
+    <select name="location">
+        <option value="">All Locations</option>
+        {% for loc in locations %}
+            <option value="{{ loc[0] }}">{{ loc[0] }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Filter</button>
+</form>
+
+<div class="institution-list">
+    {% for inst in institutions %}
+        <div class="institution-card">
+            <h3>{{ inst[1] }}</h3>
+            <p>Location: {{ inst[2] }}</p>
+            <p>Average Rating: ⭐️ {{ inst[3]|round(1) }}</p>
+            <p>{{ inst[4] }}</p>
+            <a href="{{ url_for('institution_details', id=inst[0]) }}">View Details</a>
+        </div>
+    {% endfor %}
+</div>
+
+    <a href="{{ url_for('register') }}">Don't have an account? Register</a>
+</body>
+</html>

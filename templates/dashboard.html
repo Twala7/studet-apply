@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Welcome, {{ name }}</h2>
+    <h3>Available Institutions</h3>
+    <ul>
+        {% for inst in institutions %}
+            <li>{{ inst.name }} - <a href="{{ url_for('apply', institution_id=inst.id) }}">Apply</a></li>
+        {% endfor %}
+    </ul>
+    <a class="a-all" href="{{ url_for('logout') }}">Logout</a>
+</body>
+</html>

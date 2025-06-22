@@ -1,0 +1,59 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+    <title>Apply to Course</title>  
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">  
+</head>  
+<body> 
+     <div class="container">  
+<h2>Select Course and Input Grades</h2> 
+
+<form method="post" action="">
+   
+    <label>Select Course:</label>
+    <select name="course" required>
+        {% for c in courses %}
+            <option value="{{ c.id }}">{{ c.course_name }}</option>
+        {% endfor %}
+    </select>
+    <br>
+    
+     <label for="english_grade">English Requirement:</label>
+        <select id="english_grade" name="english" required>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+            <option value="E">E</option>
+        </select>
+
+     <label for="maths_grade">Maths Requirement:</label>
+        <select id="maths_grade" name="maths" required>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+            <option value="E">E</option>
+        </select>
+
+     <label for="science_grade">Science Requirement:</label>
+        <select id="science_grade" name="science" required>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+            <option value="E">E</option>
+        </select>
+
+    <label for="sesotho_grade">Science Requirement:</label>
+        <select id="sesotho_grade" name="sesotho" required>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+            <option value="E">E</option>
+        </select>
+      
+    <button type="submit">Apply</button>
+    </div>
+</form>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+   <h2>Share Your Feedback</h2>
+<form method="POST" action="/feedback">
+    <label for="institution">Institution:</label>
+    <select name="institution_id">
+        {% for inst in institutions %}
+            <option value="{{ inst[1] }}">{{ inst[0] }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="comment">Your Feedback:</label>
+    <textarea name="comment" required></textarea>
+
+    <label for="rating">Rating:</label>
+    <div class="rating">
+        {% for i in range(5, 0, -1) %}
+            <input type="radio" name="rating" id="star{{ i }}" value="{{ i }}">
+            <label for="star{{ i }}">★</label>
+        {% endfor %}
+    </div>
+    
+    <button type="submit">Submit</button>
+</form>
+
+<h2>Recent Feedback</h2>
+{% for fb in feedback %}
+    <div class="feedback-entry">
+        <h3>{{ fb[3] }}</h3>
+        <p>{{ fb[0] }}</p>
+        <p>Rating: ⭐️ {{ fb[1] }}</p>
+        <p>Posted on {{ fb[2] }}</p>
+    </div>
+{% endfor %}
+
+    <a href="{{ url_for('register') }}">Don't have an account? Register</a>
+</body>
+</html>

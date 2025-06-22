@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+   <h2>{{ institution[0] }}</h2>
+<p>Location: {{ institution[1] }}</p>
+<p>Average Rating: ⭐️ {{ institution[3]|round(1) }}</p>
+<p>{{ institution[2] }}</p>
+
+<h3>User Reviews</h3>
+{% for review in reviews %}
+    <div class="review-entry">
+        <h4>{{ review[3] }}</h4>
+        <p>{{ review[0] }}</p>
+        <p>Rating: ⭐️ {{ review[1] }}</p>
+        <p>Posted on {{ review[2] }}</p>
+    </div>
+{% else %}
+    <p>No reviews yet. Be the first to write one!</p>
+{% endfor %}
+
+<h3>Leave a Review</h3>
+<form method="POST" action="/submit_review">
+    <input type="hidden" name="institution_id" value="{{ institution[0] }}">
+    <textarea name="review" required placeholder="Write your review"></textarea>
+
+    <label for="rating">Rating:</label>
+    <div class="rating">
+        {% for i in range(5, 0, -1) %}
+            <input type="radio" name="rating" id="star{{ i }}" value="{{ i }}">
+            <label for="star{{ i }}">★</label>
+        {% endfor %}
+    </div>
+
+    <button type="submit">Submit</button>
+</form>
+
+    <a href="{{ url_for('register') }}">Don't have an account? Register</a>
+</body>
+</html>
