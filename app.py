@@ -3,6 +3,7 @@ from flask_mysqldb import MySQL
 from werkzeug.security import generate_password_hash, check_password_hash
 import MySQLdb.cursors
 import re
+from MySQLdb import IntegrityError
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
@@ -32,13 +33,23 @@ def register():
 
         hashed_pw = generate_password_hash(pw)
 
-        cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-        cur.execute('INSERT INTO students (full_name, student_number, email, password, school_name) VALUES (%s, %s, %s, %s, %s)', (full_name, student_number, email, hashed_pw, school_name))
-        mysql.connection.commit()
-        flash('Registration successful! Please log in.')
+        try:
+            cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+            cur.execute('INSERT INTO students (full_name, student_number, email, password, school_name) VALUES (%s, %s, %s, %s, %s)', (full_name, student_number, email, hashed_pw, school_name))
+            mysql.connection.commit()
+            flash('Registration successful! Please log in.')
+            return redirect(url_for('login'))
+            
+        except IntegrityError as e:
+            if 'Duplicate entry' in str(e):
+              flash('Student number or Password already taken try another.')
+            
+            else:
+              flash('SOMETHING WENT WRONG.')
+            
+        finally:
+            cur.close()
         
-        cur.close()
-        return redirect(url_for('login'))
 
     return render_template('register.html')
 

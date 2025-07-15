@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+    <body class="admin-register-page"></body>
     <h2>Register</h2>
     <form method="post" action="{{ url_for('admin_register') }}">
         <input type="text" name="full_name" placeholder="Full Name" required><br>

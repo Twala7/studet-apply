@@ -6,6 +6,8 @@
     <title>{{ action }} Institution</title>
 </head>
 <body>
+    <body class="institution-form-page">
+
     <h1>{{ action }} Institution</h1>
    <form method="POST" action="{{ url_for('edit_institution', inst_id=institution.id) if action == 'Edit' else url_for('add_institution') }}">
         <input type="text" name="name" placeholder="Institution Name" value="{{ institution.name if institution else '' }}" required>

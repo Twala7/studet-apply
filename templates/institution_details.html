@@ -5,6 +5,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+    <body class="review-page">
+
    <h2>{{ institution[0] }}</h2>
 <p>Location: {{ institution[1] }}</p>
 <p>Average Rating: ⭐️ {{ institution[3]|round(1) }}</p>

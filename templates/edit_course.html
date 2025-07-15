@@ -5,6 +5,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+    <body class="edit-course-page">
+
     <h2>Edit Course</h2>
     <form method="post" action="{{ url_for('edit_course', course_id=course.id) }}">
         <label>Course Name:</label>

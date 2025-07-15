@@ -5,6 +5,19 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+    <body class="student-login-page">
+
+    {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class="flashes">
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+
     <h2>Student Login</h2>
     <form method="post" action="{{ url_for('login') }}">
         <input type="text" name="student_number" placeholder="Student Number" required><br>
